@@ -136,3 +136,10 @@ function App() {
 }
 
 export default App;
+import React from 'react';
+
+function App() {
+  return <h1>🏨 Budget Inn</h1>;
+}
+
+export default App;
