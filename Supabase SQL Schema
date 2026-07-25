@@ -1,0 +1,28 @@
+-- Users
+CREATE TABLE users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  role TEXT DEFAULT 'guest'
+);
+
+-- Listings
+CREATE TABLE listings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  host_id UUID REFERENCES users(id),
+  title TEXT NOT NULL,
+  city TEXT,
+  price DECIMAL(10,2),
+  type TEXT DEFAULT 'daily',
+  icon TEXT
+);
+
+-- Bookings
+CREATE TABLE bookings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  listing_id UUID REFERENCES listings(id),
+  guest_id UUID REFERENCES users(id),
+  check_in TIMESTAMP,
+  total_price DECIMAL(10,2),
+  status TEXT DEFAULT 'pending'
+);
