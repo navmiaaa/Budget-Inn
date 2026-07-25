@@ -1,1 +1,83 @@
-body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 20px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f7f7f7; color: #222; }
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.logo h1 { font-size: 22px; font-weight: 600; }
+.header-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.header-controls select { padding: 6px 12px; border-radius: 8px; border: 1px solid #ddd; background: #fff; }
+.btn-outline { background: transparent; border: none; font-weight: 500; cursor: pointer; padding: 6px 12px; }
+.btn-primary { background: #222; color: #fff; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; }
+
+/* HERO SEARCH */
+.hero {
+  background: #fff;
+  padding: 48px 20px 56px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+.hero h2 { font-size: 32px; font-weight: 600; }
+.hero p { font-size: 16px; color: #717171; margin: 8px 0 24px; }
+.search-box {
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 48px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.search-box input { flex: 1; padding: 18px 24px; border: none; font-size: 16px; outline: none; }
+.search-box button { padding: 18px 32px; background: #222; color: #fff; border: none; font-size: 18px; cursor: pointer; }
+
+/* MAIN LAYOUT */
+.main-layout { display: flex; background: #fff; border-bottom: 1px solid #ddd; }
+.filters-panel { width: 280px; padding: 24px; border-right: 1px solid #ddd; flex-shrink: 0; }
+.filters-panel h3 { font-size: 18px; margin-bottom: 16px; }
+.filter-group { margin-bottom: 20px; }
+.filter-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.filter-group select, .filter-group input { width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
+.price-range { display: flex; gap: 8px; align-items: center; }
+.price-range input { width: 45%; }
+.type-options { display: flex; flex-direction: column; gap: 4px; }
+.type-options label { font-weight: 400; font-size: 14px; }
+.apply-btn { width: 100%; padding: 10px; background: #222; color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+.apply-btn:hover { background: #000; }
+.map-container { flex: 1; min-height: 500px; background: #e5e3df; }
+
+/* CARDS */
+.section { max-width: 1300px; margin: 32px auto; padding: 0 24px; }
+.section h3 { font-size: 22px; font-weight: 600; margin-bottom: 16px; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+.card { background: #fff; border-radius: 16px; padding: 16px; border: 1px solid #eee; transition: 0.2s; cursor: pointer; }
+.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+.card-icon { font-size: 36px; margin-bottom: 8px; }
+.card-body h4 { font-size: 16px; font-weight: 600; }
+.card-body .host { font-size: 14px; color: #717171; }
+.card-body .date { font-size: 13px; color: #717171; }
+.card-body .price { font-size: 16px; font-weight: 600; margin-top: 4px; }
+.card-body .rating { font-size: 14px; }
+.badge { display: inline-block; background: #f7f7f7; padding: 2px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-top: 6px; }
+
+footer { background: #fff; color: #717171; text-align: center; padding: 20px; border-top: 1px solid #ddd; font-size: 14px; margin-top: 32px; }
+
+@media (max-width: 768px) {
+  .main-layout { flex-direction: column; }
+  .filters-panel { width: 100%; border-right: none; border-bottom: 1px solid #ddd; }
+  .map-container { min-height: 300px; }
+  .header { flex-direction: column; align-items: stretch; text-align: center; }
+  .header-controls { justify-content: center; }
+  .search-box { flex-direction: column; border-radius: 24px; }
+  .search-box input { border-radius: 24px 24px 0 0; }
+  .search-box button { border-radius: 0 0 24px 24px; }
+}
