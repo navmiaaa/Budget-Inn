@@ -13,24 +13,23 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 }
 .logo h1 { font-size: 22px; font-weight: 600; }
 .header-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-.nav-btn { background: transparent; border: none; font-weight: 500; cursor: pointer; padding: 8px 12px; font-size: 14px; }
-.nav-btn:hover { background: #f0f0f0; border-radius: 8px; }
+.btn-outline { background: transparent; border: none; font-weight: 500; cursor: pointer; padding: 8px 12px; }
 .btn-primary { background: #222; color: #fff; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; }
 .lang-select { padding: 6px 12px; border-radius: 8px; border: 1px solid #ddd; background: #fff; cursor: pointer; }
 
 /* HERO */
 .hero {
   background: #fff;
-  padding: 48px 20px 40px;
+  padding: 40px 20px;
   text-align: center;
   border-bottom: 1px solid #ddd;
 }
 .hero h2 { font-size: 32px; font-weight: 600; }
-.hero p { font-size: 16px; color: #717171; margin: 8px 0 20px; }
+.hero p { font-size: 16px; color: #717171; margin: 8px 0 16px; }
 
 .search-box {
   display: flex;
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 48px;
@@ -39,13 +38,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 }
 .search-box input {
   flex: 1;
-  padding: 16px 24px;
+  padding: 14px 20px;
   border: none;
   font-size: 16px;
   outline: none;
 }
 .search-box button {
-  padding: 16px 28px;
+  padding: 14px 24px;
   background: #222;
   color: #fff;
   border: none;
@@ -53,30 +52,38 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   cursor: pointer;
 }
 
-/* MAP */
-.map-container {
-  width: 100%;
-  height: 400px;
-  background: #e5e3df;
+/* CATEGORIES */
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  background: #fff;
   border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
 }
-.map-container iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
+.cat-btn {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #222;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
 }
+.cat-btn.active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+.cat-btn:hover { border-color: #222; }
 
 /* CARDS */
-.section {
-  max-width: 1200px;
-  margin: 32px auto;
-  padding: 0 24px;
-}
-.section h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
-
+.section { max-width: 1200px; margin: 32px auto; padding: 0 20px; }
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 24px;
 }
 
@@ -86,25 +93,38 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   padding: 20px;
   border: 1px solid #eee;
   transition: 0.2s;
-  cursor: pointer;
 }
 .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
 
 .card-icon { font-size: 40px; margin-bottom: 8px; }
 .card-body h4 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
-.card-body .host { font-size: 14px; color: #717171; }
-.card-body .date { font-size: 13px; color: #717171; }
-.card-body .price { font-size: 18px; font-weight: 600; margin-top: 6px; }
-.card-body .rating { font-size: 14px; color: #222; margin-top: 4px; }
-.badge {
+.card-body .city { font-size: 14px; color: #717171; }
+.card-body .price { font-size: 18px; font-weight: 600; margin: 6px 0; }
+
+.tag {
   display: inline-block;
-  background: #f7f7f7;
   padding: 2px 12px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 500;
-  margin-top: 6px;
+  margin: 4px 0 10px;
 }
+.tag.short { background: #e3f2fd; color: #0d47a1; }
+.tag.long { background: #e8f5e9; color: #2e7d32; }
+.tag.emergency { background: #ffebee; color: #c62828; }
+.tag.vacation { background: #fff3e0; color: #e65100; }
+
+.book-btn {
+  width: 100%;
+  padding: 10px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.book-btn:hover { background: #000; }
 
 footer {
   background: #fff;
@@ -116,14 +136,11 @@ footer {
   margin-top: 32px;
 }
 
-/* RESPONSIVE */
 @media (max-width: 600px) {
-  .header { flex-direction: column; align-items: stretch; text-align: center; gap: 8px; }
+  .header { flex-direction: column; text-align: center; gap: 8px; }
   .header-actions { justify-content: center; flex-wrap: wrap; }
   .hero h2 { font-size: 24px; }
-  .search-box { flex-direction: column; border-radius: 24px; }
-  .search-box input { border-radius: 24px 24px 0 0; }
-  .search-box button { border-radius: 0 0 24px 24px; }
-  .map-container { height: 250px; }
+  .categories { gap: 8px; }
+  .cat-btn { font-size: 12px; padding: 8px 14px; }
   .cards-grid { grid-template-columns: 1fr; }
 }
