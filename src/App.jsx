@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
+// ===== TRANSLATIONS =====
 const translations = {
   en: {
     title: "Budget Inn",
@@ -27,10 +28,16 @@ const translations = {
       photo: "Photo URL",
       submit: "Publish Listing"
     },
-    booking: {
-      confirm: "Booking Confirmed!",
-      emailSent: "Confirmation email sent to",
-      reply: "Thank you for booking! We'll contact you within 24 hours."
+    auth: {
+      welcome: "Welcome to Budget Inn",
+      name: "Full Name",
+      email: "Email Address",
+      password: "Password (min 6 chars)",
+      signup: "Sign Up",
+      login: "Login",
+      or: "or",
+      already: "Already have an account?",
+      noAccount: "Don't have an account?"
     }
   },
   fr: {
@@ -58,19 +65,26 @@ const translations = {
       photo: "URL photo",
       submit: "Publier"
     },
-    booking: {
-      confirm: "Réservation confirmée !",
-      emailSent: "Email de confirmation envoyé à",
-      reply: "Merci pour votre réservation ! Nous vous contacterons sous 24h."
+    auth: {
+      welcome: "Bienvenue sur Budget Inn",
+      name: "Nom complet",
+      email: "Adresse e-mail",
+      password: "Mot de passe (6 caractères min)",
+      signup: "S'inscrire",
+      login: "Se connecter",
+      or: "ou",
+      already: "Vous avez déjà un compte ?",
+      noAccount: "Pas de compte ?"
     }
   }
 };
 
+// ===== INITIAL LISTINGS =====
 const initialListings = [
-  { id: 1, title: "Charme Parisien", city: "Paris", price: 65, type: "short", icon: "🏠", host: "Sophie", email: "sophie@budgetinn.com" },
-  { id: 2, title: "Studio Lyon", city: "Lyon", price: 50, type: "short", icon: "🏠", host: "Jean", email: "jean@budgetinn.com" },
-  { id: 3, title: "Villa Marseille", city: "Marseille", price: 30, type: "emergency", icon: "🚨", host: "Marie", email: "marie@budgetinn.com" },
-  { id: 4, title: "Nice Vacations", city: "Nice", price: 80, type: "vacation", icon: "🌴", host: "Pierre", email: "pierre@budgetinn.com" }
+  { id: 1, title: "Charme Parisien", city: "Paris", price: 65, type: "short", icon: "🏠", host: "Sophie" },
+  { id: 2, title: "Studio Lyon", city: "Lyon", price: 50, type: "short", icon: "🏠", host: "Jean" },
+  { id: 3, title: "Villa Marseille", city: "Marseille", price: 30, type: "emergency", icon: "🚨", host: "Marie" },
+  { id: 4, title: "Nice Vacations", city: "Nice", price: 80, type: "vacation", icon: "🌴", host: "Pierre" }
 ];
 
 function App() {
@@ -79,43 +93,41 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [listings, setListings] = useState(initialListings);
   const [user, setUser] = useState(null);
-  const [showLogin, setShowLogin] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const [showHost, setShowHost] = useState(false);
-  const [bookingMessage, setBookingMessage] = useState('');
   const [newListing, setNewListing] = useState({ title: '', city: '', price: '', type: 'short', image: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
+
   const text = translations[lang];
 
-  // ===== AUTH =====
-  const handleLogin = () => {
-    const name = prompt("Enter your name:");
-    if (!name) return;
-    const email = prompt("Enter your email (for confirmation):");
-    if (!email) return;
-    setUser({ name, email });
-    setShowLogin(false);
-  };
-
-  const handleLogout = () => setUser(null);
-
-  // ===== BOOKING WITH EMAIL =====
-  const handleBooking = (listing) => {
-    if (!user) {
-      alert("Please Sign In first!");
-      setShowLogin(true);
+  // ===== AUTH HANDLERS =====
+  const handleAuthSubmit = (e) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.password) {
+      alert("Please fill all fields");
       return;
     }
-    // Show confirmation
-    setBookingMessage(`✅ ${text.booking.confirm}\n${text.booking.emailSent}: ${user.email}\n${text.booking.reply}`);
-    alert(bookingMessage || `${text.booking.confirm}\n${text.booking.emailSent}: ${user.email}\n${text.booking.reply}`);
-    // Simulate email sent
-    console.log(`📧 Email sent to ${user.email} for listing: ${listing.title}`);
+    if (form.password.length < 6) {
+      alert("Password must be at least 6 characters");
+      return;
+    }
+    setUser({ name: form.name, email: form.email });
+    setShowAuth(false);
+    setForm({ name: '', email: '', password: '' });
+    alert(`✅ Welcome ${form.name}!`);
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    setShowHost(false);
   };
 
   // ===== HOST =====
   const addListing = () => {
     if (!user) {
       alert("Please Sign In first!");
-      setShowLogin(true);
+      setShowAuth(true);
       return;
     }
     if (!newListing.title || !newListing.city || !newListing.price) {
@@ -129,8 +141,7 @@ function App() {
       price: parseInt(newListing.price),
       type: newListing.type,
       icon: newListing.image || '🏠',
-      host: user.name,
-      email: user.email
+      host: user.name
     };
     setListings([listing, ...listings]);
     setNewListing({ title: '', city: '', price: '', type: 'short', image: '' });
@@ -138,6 +149,17 @@ function App() {
     alert("✅ Listing published successfully!");
   };
 
+  // ===== BOOKING =====
+  const handleBooking = (listing) => {
+    if (!user) {
+      alert("Please Sign In first!");
+      setShowAuth(true);
+      return;
+    }
+    alert(`✅ Booking confirmed for ${listing.title}!\n📧 Confirmation sent to ${user.email}`);
+  };
+
+  // ===== FILTER =====
   const filtered = listings.filter(l => {
     const matchSearch = l.city.toLowerCase().includes(search.toLowerCase()) ||
       l.title.toLowerCase().includes(search.toLowerCase());
@@ -157,8 +179,8 @@ function App() {
           </select>
           {!user ? (
             <>
-              <button className="btn-outline" onClick={() => setShowLogin(true)}>{text.signin}</button>
-              <button className="btn-primary" onClick={() => setShowLogin(true)}>{text.join}</button>
+              <button className="btn-outline" onClick={() => { setShowAuth(true); setIsLogin(true); }}>{text.signin}</button>
+              <button className="btn-primary" onClick={() => { setShowAuth(true); setIsLogin(false); }}>{text.join}</button>
             </>
           ) : (
             <>
@@ -170,14 +192,49 @@ function App() {
         </div>
       </header>
 
-      {/* LOGIN MODAL */}
-      {showLogin && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Welcome to Budget Inn</h2>
-            <p>Enter your name and email to continue</p>
-            <button className="btn-primary" onClick={handleLogin}>Continue</button>
-            <button className="btn-outline" onClick={() => setShowLogin(false)}>Cancel</button>
+      {/* AUTH MODAL */}
+      {showAuth && (
+        <div className="modal" onClick={() => setShowAuth(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>{text.auth.welcome}</h2>
+            <form onSubmit={handleAuthSubmit}>
+              <input
+                type="text"
+                placeholder={text.auth.name}
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                required
+              />
+              <input
+                type="email"
+                placeholder={text.auth.email}
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                required
+              />
+              <input
+                type="password"
+                placeholder={text.auth.password}
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                required
+                minLength="6"
+              />
+              <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '12px' }}>
+                {isLogin ? text.auth.login : text.auth.signup}
+              </button>
+            </form>
+            <p style={{ marginTop: '12px', fontSize: '14px', color: '#717171' }}>
+              {isLogin ? text.auth.noAccount : text.auth.already}
+              <button
+                className="btn-outline"
+                onClick={() => setIsLogin(!isLogin)}
+                style={{ display: 'inline', padding: '4px 8px' }}
+              >
+                {isLogin ? text.auth.signup : text.auth.login}
+              </button>
+            </p>
+            <button className="btn-outline" onClick={() => setShowAuth(false)} style={{ marginTop: '8px' }}>Cancel</button>
           </div>
         </div>
       )}
@@ -247,4 +304,4 @@ function App() {
   );
 }
 
-export default App;.
+export default App;
