@@ -9,12 +9,23 @@ const translations = {
     book: "Book Now",
     signin: "Sign In",
     join: "Join",
+    logout: "Logout",
     footer: "© 2026 Budget Inn — Affordable stays",
     categories: {
-      short: "🏠 Short Term Rent",
+      short: "🏠 Short Term",
       long: "🏡 Long Duration",
       emergency: "🚨 Urgence Abri",
       vacation: "🌴 Vacations"
+    },
+    host: {
+      title: "Host Dashboard",
+      addListing: "Add New Listing",
+      name: "Title",
+      city: "City",
+      price: "Price (€/night)",
+      type: "Type",
+      photo: "Photo URL",
+      submit: "Publish Listing"
     }
   },
   fr: {
@@ -24,33 +35,77 @@ const translations = {
     book: "Réserver",
     signin: "Se connecter",
     join: "Rejoindre",
+    logout: "Déconnexion",
     footer: "© 2026 Budget Inn — Séjours abordables",
     categories: {
-      short: "🏠 Location courte durée",
+      short: "🏠 Court terme",
       long: "🏡 Longue durée",
       emergency: "🚨 Urgence Abri",
       vacation: "🌴 Vacances"
+    },
+    host: {
+      title: "Tableau de bord",
+      addListing: "Ajouter une annonce",
+      name: "Titre",
+      city: "Ville",
+      price: "Prix (€/nuit)",
+      type: "Type",
+      photo: "URL photo",
+      submit: "Publier"
     }
   }
 };
 
-const allListings = [
-  { id: 1, title: "Charme Parisien", city: "Paris", price: 65, type: "short", icon: "🏠" },
-  { id: 2, title: "Studio Lyon", city: "Lyon", price: 50, type: "short", icon: "🏠" },
-  { id: 3, title: "Appartement Bordeaux", city: "Bordeaux", price: 45, type: "long", icon: "🏡" },
-  { id: 4, title: "Villa Marseille", city: "Marseille", price: 30, type: "emergency", icon: "🚨" },
-  { id: 5, title: "Nice Vacations", city: "Nice", price: 80, type: "vacation", icon: "🌴" },
-  { id: 6, title: "Paris Vacations", city: "Paris", price: 95, type: "vacation", icon: "🌴" }
+const initialListings = [
+  { id: 1, title: "Charme Parisien", city: "Paris", price: 65, type: "short", icon: "🏠", host: "Sophie" },
+  { id: 2, title: "Studio Lyon", city: "Lyon", price: 50, type: "short", icon: "🏠", host: "Jean" },
+  { id: 3, title: "Villa Marseille", city: "Marseille", price: 30, type: "emergency", icon: "🚨", host: "Marie" },
+  { id: 4, title: "Nice Vacations", city: "Nice", price: 80, type: "vacation", icon: "🌴", host: "Pierre" }
 ];
 
 function App() {
   const [lang, setLang] = useState('en');
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [listings, setListings] = useState(initialListings);
+  const [user, setUser] = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showHost, setShowHost] = useState(false);
+  const [newListing, setNewListing] = useState({ title: '', city: '', price: '', type: 'short', image: '' });
   const text = translations[lang];
 
-  const filtered = allListings.filter(l => {
-    const matchSearch = l.city.toLowerCase().includes(search.toLowerCase()) || l.title.toLowerCase().includes(search.toLowerCase());
+  // Auth
+  const handleLogin = () => {
+    const name = prompt("Enter your name:");
+    if (name) setUser({ name });
+    setShowLogin(false);
+  };
+
+  const handleLogout = () => setUser(null);
+
+  // Add listing
+  const addListing = () => {
+    if (!newListing.title || !newListing.city || !newListing.price) {
+      alert("Please fill all fields");
+      return;
+    }
+    const listing = {
+      id: Date.now(),
+      title: newListing.title,
+      city: newListing.city,
+      price: parseInt(newListing.price),
+      type: newListing.type,
+      icon: newListing.image || '🏠',
+      host: user?.name || 'Host'
+    };
+    setListings([listing, ...listings]);
+    setNewListing({ title: '', city: '', price: '', type: 'short', image: '' });
+    setShowHost(false);
+  };
+
+  const filtered = listings.filter(l => {
+    const matchSearch = l.city.toLowerCase().includes(search.toLowerCase()) ||
+      l.title.toLowerCase().includes(search.toLowerCase());
     const matchCategory = selectedCategory === 'all' || l.type === selectedCategory;
     return matchSearch && matchCategory;
   });
@@ -61,14 +116,36 @@ function App() {
       <header className="header">
         <div className="logo"><h1>🏨 Budget Inn</h1></div>
         <div className="header-actions">
-          <button className="btn-outline">{text.signin}</button>
-          <button className="btn-primary">{text.join}</button>
           <select value={lang} onChange={(e) => setLang(e.target.value)} className="lang-select">
             <option value="en">🇬🇧 EN</option>
             <option value="fr">🇫🇷 FR</option>
           </select>
+          {!user ? (
+            <>
+              <button className="btn-outline" onClick={() => setShowLogin(true)}>{text.signin}</button>
+              <button className="btn-primary" onClick={() => setShowLogin(true)}>{text.join}</button>
+            </>
+          ) : (
+            <>
+              <span className="user-name">👤 {user.name}</span>
+              <button className="btn-outline" onClick={() => setShowHost(!showHost)}>📋 Host</button>
+              <button className="btn-outline" onClick={handleLogout}>{text.logout}</button>
+            </>
+          )}
         </div>
       </header>
+
+      {/* LOGIN MODAL */}
+      {showLogin && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Welcome to Budget Inn</h2>
+            <p>Enter your name to continue</p>
+            <button className="btn-primary" onClick={handleLogin}>Continue</button>
+            <button className="btn-outline" onClick={() => setShowLogin(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
 
       {/* HERO */}
       <section className="hero">
@@ -89,6 +166,26 @@ function App() {
         <button className={`cat-btn ${selectedCategory === 'vacation' ? 'active' : ''}`} onClick={() => setSelectedCategory('vacation')}>{text.categories.vacation}</button>
       </section>
 
+      {/* HOST DASHBOARD */}
+      {showHost && user && (
+        <section className="host-dashboard">
+          <h3>{text.host.title}</h3>
+          <div className="host-form">
+            <input placeholder={text.host.name} value={newListing.title} onChange={(e) => setNewListing({ ...newListing, title: e.target.value })} />
+            <input placeholder={text.host.city} value={newListing.city} onChange={(e) => setNewListing({ ...newListing, city: e.target.value })} />
+            <input placeholder={text.host.price} type="number" value={newListing.price} onChange={(e) => setNewListing({ ...newListing, price: e.target.value })} />
+            <select value={newListing.type} onChange={(e) => setNewListing({ ...newListing, type: e.target.value })}>
+              <option value="short">Short Term</option>
+              <option value="long">Long Duration</option>
+              <option value="emergency">Emergency</option>
+              <option value="vacation">Vacation</option>
+            </select>
+            <input placeholder={text.host.photo} value={newListing.image} onChange={(e) => setNewListing({ ...newListing, image: e.target.value })} />
+            <button className="btn-primary" onClick={addListing}>{text.host.submit}</button>
+          </div>
+        </section>
+      )}
+
       {/* CARDS */}
       <section className="section">
         <div className="cards-grid">
@@ -99,6 +196,7 @@ function App() {
                 <h4>{item.title}</h4>
                 <p className="city">📍 {item.city}</p>
                 <p className="price">€{item.price}/night</p>
+                <p className="host-name">👤 {item.host}</p>
                 <span className={`tag ${item.type}`}>
                   {item.type === 'short' ? 'Short' : item.type === 'long' ? 'Long' : item.type === 'emergency' ? 'Emergency' : 'Vacation'}
                 </span>
