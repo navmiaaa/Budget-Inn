@@ -35,3 +35,4 @@ app.post('/api/bookings', async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Budget Inn API running on port ${PORT}`));
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL);
