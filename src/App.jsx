@@ -16,7 +16,7 @@ const currencies = {
 const translations = {
   en: {
     dir: "ltr",
-    title: "HavenHub",
+    title: "BudgetInn",
     subtitle: "Empowering global communities with emergency shelter, short-term stays, and long-term vacations.",
     search: "Search by city, title, or host...",
     searchBtn: "Search",
@@ -24,7 +24,7 @@ const translations = {
     signin: "Sign In",
     join: "Join Now",
     logout: "Log Out",
-    footer: "© 2026 HavenHub Inc. — Global Shelters & Vacation Rentals. Built for worldwide community resilience.",
+    footer: "© 2026 BudgetInn Inc. — Global Shelters & Vacation Rentals. Built for worldwide community resilience.",
     emergencyToggle: "🚨 Emergency Mode (Free/Low-cost shelters only)",
     emergencyBadge: "Emergency Shelter",
     emergencyVerified: "Emergency Host Verified",
@@ -70,7 +70,7 @@ const translations = {
       close: "Close Dashboard"
     },
     auth: {
-      welcome: "Welcome to HavenHub",
+      welcome: "Welcome to BudgetInn",
       name: "Your Full Name",
       email: "Email Address",
       password: "Password (min 6 chars)",
@@ -109,7 +109,7 @@ const translations = {
   },
   fr: {
     dir: "ltr",
-    title: "HavenHub",
+    title: "BudgetInn",
     subtitle: "Soutenir les communautés mondiales avec des abris d'urgence, des séjours courts et des vacances à long terme.",
     search: "Rechercher par ville, titre ou hôte...",
     searchBtn: "Rechercher",
@@ -117,7 +117,7 @@ const translations = {
     signin: "Se connecter",
     join: "S'inscrire",
     logout: "Déconnexion",
-    footer: "© 2026 HavenHub Inc. — Abris globaux & Locations de vacances. Conçu pour la résilience communautaire.",
+    footer: "© 2026 BudgetInn Inc. — Abris globaux & Locations de vacances. Conçu pour la résilience communautaire.",
     emergencyToggle: "🚨 Mode d'urgence (Abris gratuits/à bas prix uniquement)",
     emergencyBadge: "Abri d'urgence",
     emergencyVerified: "Hôte d'urgence vérifié",
@@ -163,7 +163,7 @@ const translations = {
       close: "Fermer le tableau de bord"
     },
     auth: {
-      welcome: "Bienvenue sur HavenHub",
+      welcome: "Bienvenue sur BudgetInn",
       name: "Nom complet",
       email: "Adresse e-mail",
       password: "Mot de passe (6 car. min)",
@@ -202,7 +202,7 @@ const translations = {
   },
   es: {
     dir: "ltr",
-    title: "HavenHub",
+    title: "BudgetInn",
     subtitle: "Apoyando a las comunidades globales con refugios de emergencia, estadías cortas y vacaciones de largo plazo.",
     search: "Buscar por ciudad, título o anfitrión...",
     searchBtn: "Buscar",
@@ -210,7 +210,7 @@ const translations = {
     signin: "Iniciar sesión",
     join: "Registrarse",
     logout: "Cerrar sesión",
-    footer: "© 2026 HavenHub Inc. — Refugios globales y alquileres vacacionales. Diseñado para la resiliencia comunitaria.",
+    footer: "© 2026 BudgetInn Inc. — Refugios globales y alquileres vacacionales. Diseñado para la resiliencia comunitaria.",
     emergencyToggle: "🚨 Modo de Emergencia (Solo refugios gratuitos/bajo costo)",
     emergencyBadge: "Refugio de Emergencia",
     emergencyVerified: "Anfitrión de Emergencia Verificado",
@@ -256,7 +256,7 @@ const translations = {
       close: "Cerrar panel de control"
     },
     auth: {
-      welcome: "Bienvenido a HavenHub",
+      welcome: "Bienvenido a BudgetInn",
       name: "Nombre completo",
       email: "Correo electrónico",
       password: "Contraseña (mínimo 6 caracteres)",
@@ -295,7 +295,7 @@ const translations = {
   },
   ja: {
     dir: "ltr",
-    title: "HavenHub",
+    title: "BudgetInn",
     subtitle: "緊急避難所、短期滞在、長期のバケーションレンタルで世界のコミュニティをサポートします。",
     search: "都市、物件名、またはホスト名で検索...",
     searchBtn: "検索",
@@ -303,7 +303,7 @@ const translations = {
     signin: "サインイン",
     join: "新規登録",
     logout: "ログアウト",
-    footer: "© 2026 HavenHub Inc. — グローバル避難所＆バケーションレンタル。世界的な相互支援と防災のために。",
+    footer: "© 2026 BudgetInn Inc. — グローバル避難所＆バケーションレンタル。世界的な相互支援と防災のために。",
     emergencyToggle: "🚨 緊急モード (無料/低価格の避難所のみ表示)",
     emergencyBadge: "緊急避難所",
     emergencyVerified: "認定緊急ホスト",
@@ -349,7 +349,7 @@ const translations = {
       close: "ダッシュボードを閉じる"
     },
     auth: {
-      welcome: "HavenHubへようこそ",
+      welcome: "BudgetInnへようこそ",
       name: "氏名",
       email: "メールアドレス",
       password: "パスワード (6文字以上)",
@@ -388,7 +388,7 @@ const translations = {
   },
   ar: {
     dir: "rtl",
-    title: "HavenHub",
+    title: "BudgetInn",
     subtitle: "تمكين المجتمعات العالمية من خلال ملاجئ الطوارئ، والإقامات قصيرة الأجل، وإجازات المدى الطويل.",
     search: "ابحث بالمدينة، العنوان، أو المضيف...",
     searchBtn: "بحث",
@@ -396,7 +396,7 @@ const translations = {
     signin: "تسجيل الدخول",
     join: "انضم الآن",
     logout: "تسجيل الخروج",
-    footer: "© 2026 HavenHub Inc. — الملاجئ العالمية وإيجارات العطلات. صُمم لدعم صمود المجتمعات في جميع أنحاء العالم.",
+    footer: "© 2026 BudgetInn Inc. — الملاجئ العالمية وإيجارات العطلات. صُمم لدعم صمود المجتمعات في جميع أنحاء العالم.",
     emergencyToggle: "🚨 وضع الطوارئ (ملاجئ مجانية/منخفضة التكلفة فقط)",
     emergencyBadge: "ملجأ طوارئ",
     emergencyVerified: "مضيف طوارئ معتمد",
@@ -442,7 +442,7 @@ const translations = {
       close: "إغلاق لوحة التحكم"
     },
     auth: {
-      welcome: "مرحباً بك في HavenHub",
+      welcome: "مرحباً بك في BudgetInn",
       name: "الاسم الكامل",
       email: "البريد الإلكتروني",
       password: "كلمة المرور (6 أحرف على الأقل)",
@@ -695,7 +695,7 @@ function App() {
     setUser({ name: displayName, email: authForm.email });
     setShowAuth(false);
     setAuthForm({ name: '', email: '', password: '' });
-    alert(`✅ Welcome to HavenHub, ${displayName}!`);
+    alert(`✅ Welcome to BudgetInn, ${displayName}!`);
   };
 
   const handleLogout = () => {
