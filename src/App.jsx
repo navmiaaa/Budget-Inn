@@ -549,7 +549,7 @@ const initialListings = [
   },
   {
     id: 5,
-    title: "Warm Safe-Haven Emergency Shelter",
+    title: "Warm Safe Emergency Shelter",
     city: "Brussels, Belgium",
     price: 0,
     type: "emergency",
